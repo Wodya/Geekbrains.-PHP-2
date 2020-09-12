@@ -1,4 +1,6 @@
 <?php
+namespace app\models;
+use app\services\IDB;
 
 abstract class Model
 {

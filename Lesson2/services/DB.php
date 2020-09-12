@@ -1,6 +1,6 @@
 <?php
-
-namespace test\asd;
+namespace app\services;
+use app\models\TCalc as TCalc;
 
 class DB implements IDB
 {

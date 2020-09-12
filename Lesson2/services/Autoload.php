@@ -1,4 +1,5 @@
 <?php
+namespace app\services;
 
 class Autoload
 {
@@ -8,12 +9,8 @@ class Autoload
 
     public function load($className)
     {
-        foreach (static::DIRS as $dir) {
-            $fileName = dirname(__DIR__) . "/{$dir}/{$className}.php";
-            if (file_exists($fileName)) {
-                include $fileName;
-                break;
-            }
-        }
+        $localPath = substr($className,0,3) == "app"? substr($className,4) : $className;
+        $fileName = dirname(__DIR__) . "\\{$localPath}.php";
+        include $fileName;
     }
 }
