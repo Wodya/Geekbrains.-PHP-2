@@ -4,15 +4,28 @@
 namespace app\models;
 
 
-class Order
+class Order extends UserModel
 {
     /**
-     * @var GoodOrder[] $good_orders
+     * @var GoodOrder[] $order_spc
      */
     public $id;
     public $date;
     public $user_id;
     public $state_id;
 
-    public $good_orders;
+    public $order_spc;
+
+    protected function getTableName():string
+    {
+        return 'orders';
+    }
+    protected function getSpcTableName():string
+    {
+        return 'order_spc';
+    }
+    protected function getSpcTableNameKey():string
+    {
+        return 'order_id';
+    }
 }

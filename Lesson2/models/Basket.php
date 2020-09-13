@@ -4,11 +4,26 @@
 namespace app\models;
 
 
-class Basket
+class Basket extends UserModel
 {
     /**
-     * @var GoodOrder[] $good_orders
+     * @var GoodOrder[] $basket_spc
      */
     public $user_id;
-    public $good_orders;
+    public $last_access_date;
+
+    public $basket_spc;
+
+    protected function getTableName():string
+    {
+        return 'basket';
+    }
+    protected function getSpcTableName():string
+    {
+        return 'basket_spc';
+    }
+    protected function getSpcTableNameKey():string
+    {
+        return 'basket_id';
+    }
 }
