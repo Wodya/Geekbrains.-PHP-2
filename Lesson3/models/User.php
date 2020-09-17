@@ -18,4 +18,8 @@ class User extends Model
     {
         return 'users';
     }
+    protected function getId(): int
+    {
+        return (int)$this->id;
+    }
 }

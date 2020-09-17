@@ -18,5 +18,8 @@ class Good extends Model
     {
         return 'goods';
     }
-
+    protected function getId(): int
+    {
+        return (int)$this->id;
+    }
 }
