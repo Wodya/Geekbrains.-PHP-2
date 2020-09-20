@@ -71,11 +71,11 @@ class DB
     {
         $dbName = $this->config["db"];
         $sql = "SELECT Column_Name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_Schema='$dbName' and table_name = '$tableName' and Extra not like '%auto_increment%'";
-        $fildsInDb = [];
+        $fieldsInDb = [];
         foreach ($this->query($sql)->fetchAll() as $row)
-            $fildsInDb[] = $row['COLUMN_NAME'];
+            $fieldsInDb[] = $row['COLUMN_NAME'];
 
-        return $fildsInDb;
+        return $fieldsInDb;
     }
 
 }
