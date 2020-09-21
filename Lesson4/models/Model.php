@@ -16,7 +16,7 @@ abstract class Model
      * @return mixed
      */
     abstract protected static function getTableName():string;
-
+    const PAGE_COUNT = 3;
     /**
      * @return DB
      */
@@ -33,10 +33,12 @@ abstract class Model
         return static::getDB()->getObject($sql, static::class, $params);
     }
 
-    public static function getAll()
+    public static function getAll(int $page = null)
     {
         $tableName = static::getTableName();
-        $sql = "SELECT * FROM {$tableName}";
+        $limit = self::PAGE_COUNT;
+        $offset = self::PAGE_COUNT * $page;
+        $sql = $page === null ? "SELECT * FROM {$tableName}" : "SELECT * FROM {$tableName} limit $limit offset $offset";
         return static::getDB()->getAllObjects($sql, static::class);
     }
     protected function insert()
