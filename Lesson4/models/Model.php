@@ -39,7 +39,6 @@ abstract class Model
         $sql = "SELECT * FROM {$tableName}";
         return static::getDB()->getAllObjects($sql, static::class);
     }
-
     protected function insert()
     {
         $fields = [];
@@ -62,20 +61,22 @@ abstract class Model
         static::getDB()->execute($sql, $params);
         $this->id = static::getDB()->getLastId();
     }
-
     protected function update()
     {
-        /*
-            UPDATE
-                `users`
-            SET
-                `login` = :login,
-                `password` = :password
-            WHERE
-                `id` = :id;
-        */
+        $fields = [];
+        $params = [];
+        foreach ($this as $fieldName => $value) {
+            if ($fieldName == 'id') {
+                continue;
+            }
+            $fields[] = "$fieldName = :$fieldName";
+            $params[":{$fieldName}"] = $value;
+        }
+        $params['id'] = $this->id;
+        $sql = sprintf("Update %s set %s where id=:id", static::getTableName(), implode(',', $fields));
+        static::getDB()->execute($sql, $params);
+        $this->id = static::getDB()->getLastId();
     }
-
     public function save()
     {
         if (empty($this->id)) {
@@ -84,9 +85,10 @@ abstract class Model
         }
         $this->update();
     }
-
     public function delete()
     {
-        //$this->id
+        $params['id'] = $this->id;
+        $sql = sprintf("Delete %s where id=:id", static::getTableName());
+        static::getDB()->execute($sql, $params);
     }
 }

@@ -1,16 +1,16 @@
-<?
+<?php
 use app\services\Autoload;
 
 include dirname(__DIR__) . "/services/Autoload.php";
 spl_autoload_register([(new Autoload()), 'load']);
 
 $controllerName = 'user';
-if (!empty(trim($_GET['c']))) {
+if (!empty($_GET['c'])) {
     $controllerName = trim($_GET['c']);
 }
 
 $actionName = '';
-if (!empty(trim($_GET['a']))) {
+if (!empty($_GET['a'])) {
     $actionName = trim($_GET['a']);
 }
 
