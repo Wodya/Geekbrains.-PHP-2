@@ -13,8 +13,19 @@ class UserController extends BaseController
 
     public function oneAction()
     {
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $user = new User();
+            $user->id = $this->getId();
+            $user->login = $_POST['login'];
+            $user->name = $_POST['name'];
+            $user->password = $_POST['password'];
+            $user->save();
+
+            header("Location: /?c=user&a=all");
+            exit();
+        }
         $id = $this->getId();
-        $person = User::getOne($id);
+        $person = $id>0 ? User::getOne($id) : new User();
         return $this->render('userOne', ['user' => $person]);
     }
 
