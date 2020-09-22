@@ -1,7 +1,9 @@
 <?php
 /**
+ *
 * @var \app\models\Good[] $goods
  * @var int $page
+ * @var int $maxPage
  */
 ?>
 <?php foreach ($goods as $good) : ?>
@@ -11,4 +13,4 @@
 <?php endforeach; ?>
 <a class="good_nav" href= <?= "?c=good&a=all&page=" . ($page-1 > 0 ? $page-1 : 0) ?>> &lt;&lt; </a>
 &nbsp;&nbsp;&nbsp;
-<a class="good_nav" href= <?= "?c=good&a=all&page=" . ($page+1) ?>> &gt;&gt; </a>
+<a class="good_nav" href= <?= "?c=good&a=all&page=" . ($page<$maxPage ? $page+1 : $maxPage) ?>> &gt;&gt; </a>
