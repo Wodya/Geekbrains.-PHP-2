@@ -11,10 +11,10 @@ class DB
     private $config = [
         'driver' => 'mysql',
         'host' => 'localhost',
-        'db' => 'gbphp',
+        'db' => 'php_1',
         'charset' => 'UTF8',
         'login' => 'root',
-        'password' => '',
+        'password' => 'www12345',
     ];
 
     private $connection;

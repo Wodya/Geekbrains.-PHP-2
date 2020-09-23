@@ -1,27 +1,9 @@
 <?php
-
 namespace app\controllers;
-
 use app\models\User;
 
-class UserController
+class UserController extends BaseController
 {
-    protected $actionDefault = 'all';
-
-    public function run($action)
-    {
-        if (empty($action)) {
-            $action = $this->actionDefault;
-        }
-
-        $action .= "Action";
-
-        if (!method_exists($this, $action)) {
-            return '404';
-        }
-
-        return $this->$action();
-    }
 
     public function allAction()
     {
@@ -31,8 +13,19 @@ class UserController
 
     public function oneAction()
     {
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $user = new User();
+            $user->id = $this->getId();
+            $user->login = $_POST['login'];
+            $user->name = $_POST['name'];
+            $user->password = $_POST['password'];
+            $user->save();
+
+            header("Location: /?c=user&a=all");
+            exit();
+        }
         $id = $this->getId();
-        $person = User::getOne($id);
+        $person = $id>0 ? User::getOne($id) : new User();
         return $this->render('userOne', ['user' => $person]);
     }
 
@@ -43,33 +36,4 @@ class UserController
         $user->login = 'Admin12';
         $user->save();
     }
-
-    public function render($template, $params = [])
-    {
-        $content = $this->renderTmpl($template, $params);
-        return $this->renderTmpl(
-            'layouts/main',
-            [
-                'content' => $content
-            ]
-        );
-    }
-
-    public function renderTmpl($template, $params = [])
-    {
-        extract($params);
-        ob_start();
-        include dirname(__DIR__) . '/views/' . $template . '.php';
-        return ob_get_clean();
-    }
-
-    protected function getId()
-    {
-        if (empty($_GET['id'])) {
-            return 0;
-        }
-
-        return (int)$_GET['id'];
-    }
-
 }

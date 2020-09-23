@@ -8,6 +8,8 @@ namespace app\models;
  */
 class Good extends Model
 {
+    const PAGE_COUNT = 3;
+
     public $id;
     public $name;
     public $price;

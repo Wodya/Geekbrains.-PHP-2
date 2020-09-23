@@ -12,6 +12,7 @@ class User extends Model
     public $login;
     public $password;
 
+    const PAGE_COUNT = 3;
 
     /**
      * Метод для
