@@ -10,8 +10,8 @@ class GoodController extends BaseController
     {
         $page = $this->getPage();
         $goods = Good::getAll($page);
-        $maxPage = (int) (Good::getTotal() / Good::PAGE_COUNT);
-        return $this->render('goodAll', ['goods' => $goods, 'page' => $page, 'maxPage' => $maxPage]);
+        $maxPage = (int) ((Good::getTotal()-1) / Good::PAGE_COUNT) ;
+        return $this->render('goodAll', ['goods' => $goods, 'pagePrev' => $page>0?$page-1:0, 'pageNext' => $page<$maxPage?$page+1:$maxPage]);
     }
 
     public function oneAction()

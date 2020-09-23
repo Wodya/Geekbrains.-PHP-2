@@ -1,9 +1,10 @@
 <?php
 use app\services\Autoload;
 
-include dirname(__DIR__) . "/services/Autoload.php";
-spl_autoload_register([(new Autoload()), 'load']);
-
+//include dirname(__DIR__) . "/services/Autoload.php";
+//spl_autoload_register([(new Autoload()), 'load']);
+$loader = include dirname(__DIR__) . "/vendor/autoload.php";
+$loader->setPsr4("app\\",dirname(__DIR__));
 
 $controllerName = 'user';
 if (!empty($_GET['c'])) {

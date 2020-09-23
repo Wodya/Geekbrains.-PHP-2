@@ -1,9 +1,21 @@
 <?php
 namespace app\controllers;
 
+use app\services\IRender;
+use app\services\TwigRender;
+
 class BaseController
 {
+    /**
+     * @var IRender $render;
+     */
     protected $actionDefault = 'all';
+    protected static $render;
+
+    public function __construct()
+    {
+        self::$render = new TwigRender();
+    }
 
     public function run($action)
     {
@@ -21,6 +33,8 @@ class BaseController
     }
     public function render($template, $params = [])
     {
+        self::$render->render($template, $params);
+        /*
         $content = $this->renderTmpl($template, $params);
         return $this->renderTmpl(
             'layouts/main',
@@ -28,6 +42,7 @@ class BaseController
                 'content' => $content
             ]
         );
+        */
     }
     public function renderTmpl($template, $params = [])
     {
