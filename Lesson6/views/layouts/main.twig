@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>{% block title %}Мой магазин{% endblock %}</title>
+</head>
+<body>
+<ul>
+    <li><a href="/user/all">Пользователи</a></li>
+    <li><a href="/user/one">Пользователь</a></li>
+    <li><a href="/user/add">Добавить пользователя</a></li>
+</ul>
+    {% block content %}{% endblock %}
+</body>
+</html>
