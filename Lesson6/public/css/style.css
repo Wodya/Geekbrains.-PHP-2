@@ -1,3 +1,19 @@
+*{
+    padding: 0;
+    margin: 0;
+}
 h2 {
     color: blue;
+}
+.good_img{
+    width: 200px;
+    height: 100px;
+}
+.good_img_big{
+    width: 600px;
+    height: 400px;
+}
+.good_detail{
+    display: block;
+    margin-bottom: 15px;
 }

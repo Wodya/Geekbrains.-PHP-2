@@ -1,0 +1,15 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+    {% for good in items %}
+        <img class="good_img" src="/img/image{{good.id}}.jpg" alt="">
+        <p>{{good.name}}</p>
+        <p>{{good.price}}</p>
+        <p>{{good.quantity}}</p>
+    {% else %}
+        <br>
+        Корзина пуста
+    {% endfor %}
+<br>
+    <a href="/basket/clear">Очистить</a>
+{% endblock %}

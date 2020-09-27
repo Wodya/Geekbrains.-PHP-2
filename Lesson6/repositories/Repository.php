@@ -30,13 +30,21 @@ abstract class Repository
         return static::getDB()->getObject($sql, $this->getEntityName(), $params);
     }
 
-    public function getAll()
+    public function getAll(int $page, int $pageSize)
     {
         $tableName = $this->getTableName();
-        $sql = "SELECT * FROM {$tableName}";
+        $limit = $pageSize;
+        $offset = $pageSize * $page;
+        $sql = "SELECT * FROM {$tableName} limit $limit offset $offset";
+
         return static::getDB()->getAllObjects($sql, $this->getEntityName());
     }
-
+    public function getTotal()
+    {
+        $tableName = $this->getTableName();
+        $sql = "SELECT count(*) Total FROM {$tableName}";
+        return static::getDB()->find($sql)['Total'];
+    }
     protected function insert(Entity $entity)
     {
         $fields = [];

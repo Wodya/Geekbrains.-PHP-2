@@ -8,19 +8,13 @@ use app\repositories\UserRepository;
 
 class UserController extends Controller
 {
+    protected function getPageSize(): int
+    {
+        return 4;
+    }
     public function allAction()
     {
-        $users = (new UserRepository())->getAll();
-//        $users = [
-//            ['id' => 12, 'login' => 'test'],
-//            ['id' => 121, 'login' => 'test1'],
-//            ['id' => 122, 'login' => 'test2'],
-//        ];
-        return $this->renderer
-            ->render(
-                'userAll',
-                ['users' => $users]
-            );
+        return parent::getAll(new UserRepository(),'userAll');
     }
 
     public function oneAction()

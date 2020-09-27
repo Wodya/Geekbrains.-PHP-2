@@ -1,10 +1,7 @@
-<?
-
+<?php
+session_start();
 include dirname(__DIR__) . '/vendor/autoload.php';
 $request = new \app\services\Request();
-
-
-
 $controllerName = 'user';
 if (!empty($request->getActionName())) {
     $controllerName = $request->getControllerName();

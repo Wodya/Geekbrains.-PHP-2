@@ -1,0 +1,14 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+    {% for good in items %}
+    <img class="good_img" src="/img/image{{good.id}}.jpg" alt="">
+    <p>{{good.name}}</p>
+    <a class="good_detail" href= "/good/one?id={{good.id}}"> Подробнее </a>
+    <a class="good_detail" href= "#" onclick="addGoodToBasket({{ good.id }})"> В корзину </a>
+    {% endfor %}
+    <br>
+    <a class="good_nav" href="/good/all?page={{ pagePrev }}"> &lt;&lt; </a>
+    &nbsp;&nbsp;&nbsp;
+    <a class="good_nav" href="/good/all?page={{ pageNext }}"> &gt;&gt; </a>
+{% endblock %}

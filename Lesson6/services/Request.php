@@ -2,6 +2,8 @@
 
 namespace app\services;
 
+use app\entities\Basket;
+
 class Request
 {
     protected $requestString;
@@ -98,12 +100,57 @@ class Request
 
     public function getId()
     {
-        if (empty($this->params['get']['id'])) {
-            return 0;
-        }
-
-        return (int)$this->params['get']['id'];
+        return $this->getParamInt('id');
     }
+    public function getPage()
+    {
+        return $this->getParamInt('page');
+    }
+    public function getQuantity()
+    {
+        return $this->getParamInt('quantity');
+    }
+    public function getName()
+    {
+        return $this->getParamInt('name');
+    }
+    public function getPrice()
+    {
+        return $this->getParamInt('price');
+    }
+    public function getParamInt($paramName)
+    {
+        if (!empty($this->params['get'][$paramName])) {
+            return (int)$this->params['get'][$paramName];
+        }
+        if (!empty($this->params['post'][$paramName])) {
+            return (int)$this->params['post'][$paramName];
+        }
+        return 0;
+    }
+
+    /**
+     * @return Basket[]
+     */
+    public function getBasket()
+    {
+        $basketSession =  empty($_SESSION['basket']) ? [] : $_SESSION['basket'];
+        $basketObj = [];
+        foreach ($basketSession as $basketSessionItem){
+            $basketObjItem = new Basket();
+            $basketObj[] = $basketObjItem;
+            foreach ($basketSessionItem as $key => $value) {
+                if($key[0] != '_')
+                    $basketObjItem->$key = $value;
+            }
+        }
+        return $basketObj;
+    }
+    public function setBasket($basket)
+    {
+        $_SESSION['basket'] = $basket;
+    }
+
 }
 
 class errorClass extends \Exception

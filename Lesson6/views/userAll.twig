@@ -3,11 +3,14 @@
 {% block title %}Все пользователи{% endblock %}
 
 {% block content %}
-    {% for user in users %}
+    {% for user in items %}
         <h2>{{ user.login }}</h2>
         <a href="/user/one?id={{ user.id }}">подробнее</a>
         <hr>
     {% else %}
         Список пуст
     {% endfor %}
+    <a class="good_nav" href="/user/all?page={{ pagePrev }}"> &lt;&lt; </a>
+    &nbsp;&nbsp;&nbsp;
+    <a class="good_nav" href="/user/all?page={{ pageNext }}"> &gt;&gt; </a>
 {% endblock %}

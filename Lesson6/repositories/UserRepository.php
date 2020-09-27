@@ -10,7 +10,6 @@ class UserRepository extends Repository
     {
         return  'users';
     }
-
     protected function getEntityName(): string
     {
         return User::class;

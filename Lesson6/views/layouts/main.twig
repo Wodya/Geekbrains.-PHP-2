@@ -2,12 +2,17 @@
 <html lang="en">
 <head>
     <title>{% block title %}Мой магазин{% endblock %}</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/js/script.js"></script>
 </head>
 <body>
 <ul>
     <li><a href="/user/all">Пользователи</a></li>
     <li><a href="/user/one">Пользователь</a></li>
     <li><a href="/user/add">Добавить пользователя</a></li>
+    <li><a href="/good/all">Товары</a></li>
+    <li><a href="/basket/all">Корзина</a></li>
 </ul>
     {% block content %}{% endblock %}
 </body>
