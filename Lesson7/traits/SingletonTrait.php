@@ -1,6 +1,5 @@
 <?php
 
-
 namespace app\traits;
 
 
@@ -16,6 +15,7 @@ trait SingletonTrait
 
         return static::$item;
     }
+
     protected function __construct() {}
     protected function __clone() {}
     protected function __wakeup() {}
