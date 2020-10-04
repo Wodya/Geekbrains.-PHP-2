@@ -5,10 +5,18 @@ namespace app\services;
 use app\entities\Good;
 use app\repositories\GoodRepository;
 
-class BasketService
+class BasketService extends BaseService
 {
     const BASKET_NAME = 'goods';
 
+    public function getBasket()
+    {
+        return $this->container->request->getSession(self::BASKET_NAME);
+    }
+    public function clearBasket()
+    {
+        unset($_SESSION[self::BASKET_NAME]);
+    }
     public function add($id, GoodRepository $goodRepository, Request $request)
     {
         if (empty($id)) {

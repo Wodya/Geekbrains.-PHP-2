@@ -36,7 +36,7 @@ class App
 
     private function runController()
     {
-        $request = new \app\services\Request();
+        $request = $this->container->request;
         $controllerName = $this->config['defaultController'];
         if (!empty($request->getActionName())) {
             $controllerName = $request->getControllerName();
@@ -45,7 +45,6 @@ class App
         $controllerClass = 'app\\controllers\\' . ucfirst($controllerName) . 'Controller';
 
         if (class_exists($controllerClass)) {
-            $renderer = new \app\services\TwigRenderServices();
             /** @var \app\controllers\Controller $controller */
             $controller = new $controllerClass($request, $this->container);
             echo $controller->run($request->getActionName());

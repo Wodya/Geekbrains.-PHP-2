@@ -70,7 +70,8 @@ class DB
     {
         $PDOStatement = $this->query($sql, $params);
         $PDOStatement->setFetchMode(\PDO::FETCH_CLASS, $className);
-        return $PDOStatement->fetch();
+        $item = $PDOStatement->fetch();
+        return $item ? $item : null;
     }
 
     public function getAllObjects($sql, $className, $params = [])
@@ -79,12 +80,10 @@ class DB
         $PDOStatement->setFetchMode(\PDO::FETCH_CLASS, $className);
         return $PDOStatement->fetchAll();
     }
-
     public function execute($sql, $params = [])
     {
         $this->query($sql, $params);
     }
-
     public function getLastId()
     {
         return $this->getConnection()->lastInsertId();

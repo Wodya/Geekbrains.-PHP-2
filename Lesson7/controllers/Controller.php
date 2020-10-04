@@ -70,6 +70,10 @@ abstract class Controller
 
     protected function render($template, $params = [])
     {
+        $params['user'] = $this->container->userService->getCurrentUser();
+        $msg = $this->container->request->getMsg();
+        if($msg != null)
+            $params['msg'] = $msg;
         return $this->container->renderer->render($template, $params);
     }
 

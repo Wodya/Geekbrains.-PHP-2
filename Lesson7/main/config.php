@@ -8,10 +8,10 @@ return [
             'config' => [
                 'driver' => 'mysql',
                 'host' => 'localhost',
-                'db' => 'gbphp',
+                'db' => 'php_1',
                 'charset' => 'UTF8',
                 'login' => 'root',
-                'password' => '',
+                'password' => 'www12345',
             ]
         ],
         'renderer' => [
@@ -22,6 +22,24 @@ return [
         ],
         'basketService' => [
             'class' => \app\services\BasketService::class,
+        ],
+        'userRepository' => [
+            'class' => \app\repositories\UserRepository::class,
+        ],
+        'userService' => [
+            'class' => \app\services\UserService::class,
+        ],
+        'request' => [
+            'class' => \app\services\Request::class,
+        ],
+        'orderRepository' => [
+            'class' => \app\repositories\OrderRepository::class,
+        ],
+        'orderService' => [
+            'class' => \app\services\OrderService::class,
+        ],
+        'goodService' => [
+            'class' => \app\services\GoodService::class,
         ]
     ],
 ];

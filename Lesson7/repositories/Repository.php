@@ -16,6 +16,10 @@ abstract class Repository
 
     abstract protected function getTableName():string;
     abstract protected function getEntityName():string;
+    protected function getOrderField():string
+    {
+        return "id desc";
+    }
 
     public function setContainer(Container $container)
     {
@@ -37,11 +41,11 @@ abstract class Repository
         $params = [':id' => $id];
         return $this->getDB()->getObject($sql, $this->getEntityName(), $params);
     }
-
     public function getAll()
     {
         $tableName = $this->getTableName();
-        $sql = "SELECT * FROM {$tableName}";
+        $orderField = $this->getOrderField();
+        $sql = "SELECT * FROM {$tableName} order by {$orderField}";
         return $this->getDB()->getAllObjects($sql, $this->getEntityName());
     }
 
