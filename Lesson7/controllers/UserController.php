@@ -31,8 +31,6 @@ class UserController extends Controller
                 ]
             );
     }
-
-
     public function addAction()
     {
         if ($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -48,5 +46,25 @@ class UserController extends Controller
 
         header('Location: /');
         return '';
+    }
+    public function loginFormAction()
+    {
+        return $this->render('loginForm');
+    }
+    public function loginAction()
+    {
+        try {
+            $this->container->userService->login($_POST['login'],$_POST['password'],$this->container->userRepository);
+            $this->redirect('/good');
+        }
+        catch (\Exception $exc)
+        {
+            $this->redirect('',$exc->getMessage());
+        }
+    }
+    public function logoutAction()
+    {
+        $this->container->userService->logout();
+        $this->redirect('/user/loginForm');
     }
 }

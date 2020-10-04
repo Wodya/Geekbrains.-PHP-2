@@ -1,0 +1,15 @@
+{% extends 'layouts/main.twig' %}
+
+{% block title %}Аутентификация{% endblock %}
+
+{% block content %}
+    <form action="/good/add" method="post">
+        <label for="name">Наименовние: </label>
+        <input type="text" name="name" id="name" placeholder="Наименование">
+        <label for="price">Цена: </label>
+        <input type="text" name="price" id="price" placeholder="Цена">
+        <label for="info">Информация: </label>
+        <input type="text" name="info" id="info" placeholder="Информация">
+        <input type="submit" value="Добавить">
+    </form>
+{% endblock %}

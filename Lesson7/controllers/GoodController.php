@@ -14,11 +14,25 @@ class GoodController extends Controller
             ['goods' => $goods]
         );
     }
-
     public function oneAction()
     {
         $id = $this->getId();
         $good = $this->container->goodRepository->getOne($id);
         return $this->render('goodOne', ['good' => $good,]);
+    }
+    public function addFormAction()
+    {
+        return $this->render('goodAdd',['title' => 'Добавление товара']);
+    }
+    public function addAction()
+    {
+        try {
+            $this->container->goodService->add();
+            return $this->redirect('/good/all','Товар добавлен');
+        }
+        catch (\Exception $exc)
+        {
+            return $this->redirect("",$exc->getMessage());
+        }
     }
 }

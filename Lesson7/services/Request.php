@@ -82,9 +82,15 @@ class Request
 
         return $_SESSION[$key];
     }
-
     public function setSession($key, $value)
     {
         $_SESSION[$key] = $value;
     }
+    public function getMsg() : ?string
+    {
+        $msg = !empty($_SESSION['msg']) ? (string)$_SESSION['msg'] : null;
+        unset($_SESSION['msg']);
+        return $msg;
+    }
+
 }

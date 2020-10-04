@@ -4,15 +4,26 @@
     <title>{% block title %}Мой магазин{% endblock %}</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/js/script.js"></script>
-
 </head>
 <body>
+<p style="color: green; font-size: 14px">admin / 123</p>
+<p style="color: green; font-size: 14px">user / 123</p>
 <ul>
     <li><a href="/good/all">Все товары</a></li>
     <li><a href="/basket/index">Корзина</a></li>
     <li><a href="/user/all">Пользователи</a></li>
-    <li><a href="/user/add">Добавить пользователя</a></li>
+    {% if user != null %}
+        <li><a href="/user/add">Добавить пользователя</a></li>
+        <li><a href="/good/addForm">Добавить товар</a></li>
+        <li><a href="/order/all">Список заказов</a></li>
+        <li><a href="/user/logout">Выйти ({{ user.name }})</a></li>
+    {% else %}
+        <li><a href="/user/loginForm">Войти</a></li>
+    {% endif %}
 </ul>
+    {% if msg != ''  %}
+        <p style="color: red">{{ msg }}</p>
+    {% endif %}
     {% block content %}{% endblock %}
 </body>
 </html>

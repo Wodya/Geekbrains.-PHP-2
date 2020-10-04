@@ -3,9 +3,15 @@
 namespace app\main;
 
 use app\repositories\GoodRepository;
+use app\repositories\OrderRepository;
+use app\repositories\UserRepository;
 use app\services\BasketService;
 use app\services\DB;
+use app\services\GoodService;
+use app\services\OrderService;
+use app\services\Request;
 use app\services\TwigRenderServices;
+use app\services\UserService;
 
 /**
  * Class Container
@@ -15,6 +21,12 @@ use app\services\TwigRenderServices;
  * @property GoodRepository goodRepository
  * @property TwigRenderServices renderer
  * @property BasketService basketService
+ * @property UserRepository userRepository
+ * @property UserService userService
+ * @property Request request
+ * @property OrderService orderService
+ * @property OrderRepository orderRepository
+ * @property GoodService goodService
  */
 class Container
 {
@@ -29,7 +41,11 @@ class Container
     {
         $this->componentsData = $componentsData;
     }
-
+    // Для  тестирования
+    protected function setObject($name, $object)
+    {
+        $this->components[$name] = $object;
+    }
 
     public function __get($name)
     {

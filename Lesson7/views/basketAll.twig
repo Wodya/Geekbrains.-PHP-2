@@ -1,0 +1,17 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+    {% for good in items %}
+        <p>{{good.name}}</p>
+        <p>{{good.price}}</p>
+        <p>{{good.quantity}}</p>
+    {% else %}
+        <br>
+        Корзина пуста
+    {% endfor %}
+<br>
+    {% if items is not empty %}
+        <a href="/basket/clear">Очистить</a>
+        <a href="/basket/makeOrder">Заказать</a>
+    {% endif %}
+{% endblock %}
